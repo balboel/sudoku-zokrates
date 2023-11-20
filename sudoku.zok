@@ -21,6 +21,18 @@ def check_rows<N>(Solution<N> sol) -> bool {
     return true;
 }
 
+//check each column is unique
+def check_column<N>(Solution<N> sol) -> bool {
+    for u32 i in 0..N {
+        for u32 j in 0..N {
+            for u32 k in 0..j {
+                assert(sol.elems[j][i] != sol.elems[k][i]);
+            }
+        }
+    }
+    return true;
+}
+
 // check the puzzle matches the solution
 // and the entries are constrained in the range 1..=N
 def check_puzzle_solution<N>(Solution<N> sol, Puzzle<N> puzzle) -> bool {
@@ -36,4 +48,5 @@ def check_puzzle_solution<N>(Solution<N> sol, Puzzle<N> puzzle) -> bool {
 def main(public Puzzle<2> puzzle, private Solution<2> sol) {
     assert(check_puzzle_solution(sol, puzzle));
     assert(check_rows(sol));
+    assert(check_column(sol));
 }
